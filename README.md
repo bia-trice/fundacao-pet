@@ -115,56 +115,67 @@ https://prod.liveshare.vsengsaas.visualstudio.com/join?78E70534DB682BBC09380136A
 banco: 
 create database fundacaopet;
 
-create table usuario (
-id_usuario serial primary key,
+create table usuario( 
+id_usuario serial primary key, 
 nome varchar (100) not null,
-email varchar (150) unique not null,
-senha varchar (8) not null,
-cidade varchar (100) not null
+email varchar (150) unique not null, 
+senha varchar (8) not null, 
+cidade varchar (100) not null 
 );
 
-create table campanha (
-id_campanha serial primary key,
-titulo varchar(150) unique not null,
-descricao text,
-meta_valor decimal (10, 2) not null,
+create table campanha ( 
+id_campanha serial primary key, 
+titulo varchar(150) unique not null, 
+descricao text, meta_valor decimal (10, 2) not null, 
 valor_arrecadado decimal (10,2) not null, 
-data_inicio date,
-data_fim date,
-status varchar (20) default 'ativa'
+data_inicio date, 
+data_fim date, 
+status varchar (20) default 'ativa' 
 );
 
-create table doacao (
-id_doacao serial primary key,
-id_usuario int references usuario(id_usuario),
-id_campanha int references campanha(id_campanha),
-valor decimal (10,2) not null,
-tipo_doacao varchar (20),
-forma_pagamento varchar(20),
-status_pagamento varchar(20),
-data_doacao timestamp
+create table doacao ( 
+id_doacao serial primary key, 
+id_usuario int references usuario(id_usuario), 
+id_campanha int references campanha(id_campanha), 
+valor decimal (10,2) not null, 
+tipo_doacao varchar (20), 
+forma_pagamento varchar(20), 
+status_pagamento varchar(20), 
+data_doacao timestamp 
 );
 
 CREATE TABLE publicacao (
-id_publicacao SERIAL PRIMARY KEY,
-id_usuario INT REFERENCES usuario(id_usuario),
-titulo VARCHAR(150),
+id_publicacao SERIAL PRIMARY KEY, 
+id_usuario INT REFERENCES usuario(id_usuario), 
+titulo VARCHAR(150), 
 descricao TEXT,
-data_publicacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+data_publicacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
 );
 
-CREATE TABLE comentario (
-id_comentario SERIAL PRIMARY KEY,
-id_publicacao INT REFERENCES publicacao(id_publicacao),
-id_usuario INT REFERENCES usuario(id_usuario),
-texto TEXT,
-data_comentario TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE comentario ( 
+id_comentario SERIAL PRIMARY KEY, 
+id_publicacao INT REFERENCES publicacao(id_publicacao), 
+id_usuario INT REFERENCES usuario(id_usuario), 
+texto TEXT, data_comentario TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
 );
 
-CREATE TABLE relatorio (
-id_relatorio SERIAL PRIMARY KEY,
-mes_referencia VARCHAR(20),
-total_arrecadado DECIMAL(10,2),
-descricao TEXT,
-data_publicacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE relatorio ( 
+id_relatorio SERIAL PRIMARY KEY, 
+mes_referencia VARCHAR(20), 
+total_arrecadado DECIMAL(10,2), 
+descricao TEXT, 
+data_publicacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+);
+
+CREATE TABLE analise_pet_ia (
+id SERIAL PRIMARY KEY,
+tipo_animal VARCHAR(100),
+idade VARCHAR(50),
+porte VARCHAR(50),
+peso VARCHAR(50),
+sintomas TEXT,
+alimentacao_atual TEXT,
+resposta_ia TEXT,
+grau_risco VARCHAR(20),
+data_analise TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
