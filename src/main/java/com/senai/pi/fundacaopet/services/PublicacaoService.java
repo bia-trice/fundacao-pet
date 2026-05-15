@@ -1,50 +1,47 @@
- package main.java.com.senai.pi.fundacaopet.services;
+package main.java.com.senai.pi.fundacaopet.services;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import main.java.com.senai.pi.fundacaopet.models.Publicacao;
+import main.java.com.senai.pi.fundacaopet.repositories.PublicacaoRepository;
+
+@Service
 public class PublicacaoService {
 
-    private int id;
-    private int id_usuario;
-    private String titulo;
-    private String descricao;
-    private date data_publicacao;
-    public PublicacaoService() {
+    @Autowired
+    private PublicacaoRepository publicacaoRepository;
+
+    public List<Publicacao> listarPublicacoes() {
+        return publicacaoRepository.findAll();
     }
-    public PublicacaoService(int id, int id_usuario, String titulo, String descricao, date data_publicacao) {
-        this.id = id;
-        this.id_usuario = id_usuario;
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.data_publicacao = data_publicacao;
+
+    public Publicacao buscarPorId(Integer id) {
+        return publicacaoRepository.findById(id).orElse(null);
     }
-    public int getId() {
-        return id;
+
+    public Publicacao salvarPublicacao(Publicacao publicacao) {
+        return publicacaoRepository.save(publicacao);
     }
-    public void setId(int id) {
-        this.id = id;
+
+    public Publicacao atualizarPublicacao(Integer id, Publicacao publicacaoAtualizada) {
+        Publicacao publicacao = buscarPorId(id);
+
+        if (publicacao != null) {
+            publicacao.setIdUsuario(publicacaoAtualizada.getIdUsuario());
+            publicacao.setTitulo(publicacaoAtualizada.getTitulo());
+            publicacao.setDescricao(publicacaoAtualizada.getDescricao());
+            publicacao.setDataPublicacao(publicacaoAtualizada.getDataPublicacao());
+
+            return publicacaoRepository.save(publicacao);
+        }
+
+        return null;
     }
-    public int getId_usuario() {
-        return id_usuario;
+
+    public void deletarPublicacao(Integer id) {
+        publicacaoRepository.deleteById(id);
     }
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
-    }
-    public String getTitulo() {
-        return titulo;
-    }
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-    public String getDescricao() {
-        return descricao;
-    }
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-    public date getData_publicacao() {
-        return data_publicacao;
-    }
-    public void setData_publicacao(date data_publicacao) {
-        this.data_publicacao = data_publicacao;
-    }
-    
 }

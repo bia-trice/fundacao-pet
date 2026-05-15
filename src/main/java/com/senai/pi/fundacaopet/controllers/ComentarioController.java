@@ -1,50 +1,43 @@
- package main.java.com.senai.pi.fundacaopet.controllers;
+package main.java.com.senai.pi.fundacaopet.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import main.java.com.senai.pi.fundacaopet.models.Comentario;
+import main.java.com.senai.pi.fundacaopet.services.ComentarioService;
+
+@RestController
+@RequestMapping("/comentarios")
 public class ComentarioController {
 
-     private int id;
-    public ComentarioController(int id, int id_publicacao, int id_usuario, String texto, date data_publicacao) {
-        this.id = id;
-        this.id_publicacao = id_publicacao;
-        this.id_usuario = id_usuario;
-        this.texto = texto;
-        this.data_publicacao = data_publicacao;
-    }
-    private int id_publicacao;
-    private int id_usuario;
-    private String texto;
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public int getId_publicacao() {
-        return id_publicacao;
-    }
-    public void setId_publicacao(int id_publicacao) {
-        this.id_publicacao = id_publicacao;
-    }
-    public int getId_usuario() {
-        return id_usuario;
-    }
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
-    }
-    public String getTexto() {
-        return texto;
-    }
-    public void setTexto(String texto) {
-        this.texto = texto;
-    }
-    public date getData_publicacao() {
-        return data_publicacao;
-    }
-    public void setData_publicacao(date data_publicacao) {
-        this.data_publicacao = data_publicacao;
-    }
-    private date data_publicacao;
-    public ComentarioController() {
+    @Autowired
+    private ComentarioService comentarioService;
+
+    @GetMapping
+    public List<Comentario> listarComentarios() {
+        return comentarioService.listarComentarios();
     }
 
+    @GetMapping("/{id}")
+    public Comentario buscarPorId(@PathVariable Integer id) {
+        return comentarioService.buscarPorId(id);
+    }
+
+    @PostMapping
+    public Comentario salvarComentario(@RequestBody Comentario comentario) {
+        return comentarioService.salvarComentario(comentario);
+    }
+
+    @PutMapping("/{id}")
+    public Comentario atualizarComentario(@PathVariable Integer id,
+                                          @RequestBody Comentario comentario) {
+        return comentarioService.atualizarComentario(id, comentario);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletarComentario(@PathVariable Integer id) {
+        comentarioService.deletarComentario(id);
+    }
 }

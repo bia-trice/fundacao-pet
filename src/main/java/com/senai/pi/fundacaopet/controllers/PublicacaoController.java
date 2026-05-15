@@ -1,50 +1,43 @@
- package main.java.com.senai.pi.fundacaopet.controllers;
+package main.java.com.senai.pi.fundacaopet.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import main.java.com.senai.pi.fundacaopet.models.Publicacao;
+import main.java.com.senai.pi.fundacaopet.services.PublicacaoService;
+
+@RestController
+@RequestMapping("/publicacoes")
 public class PublicacaoController {
 
-    private int id;
-    private int id_usuario;
-    private String titulo;
-    private String descricao;
-    private date data_publicacao;
-    public PublicacaoController() {
+    @Autowired
+    private PublicacaoService publicacaoService;
+
+    @GetMapping
+    public List<Publicacao> listarPublicacoes() {
+        return publicacaoService.listarPublicacoes();
     }
-    public PublicacaoController(int id, int id_usuario, String titulo, String descricao, date data_publicacao) {
-        this.id = id;
-        this.id_usuario = id_usuario;
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.data_publicacao = data_publicacao;
+
+    @GetMapping("/{id}")
+    public Publicacao buscarPorId(@PathVariable Integer id) {
+        return publicacaoService.buscarPorId(id);
     }
-    public int getId() {
-        return id;
+
+    @PostMapping
+    public Publicacao salvarPublicacao(@RequestBody Publicacao publicacao) {
+        return publicacaoService.salvarPublicacao(publicacao);
     }
-    public void setId(int id) {
-        this.id = id;
+
+    @PutMapping("/{id}")
+    public Publicacao atualizarPublicacao(@PathVariable Integer id,
+                                          @RequestBody Publicacao publicacao) {
+        return publicacaoService.atualizarPublicacao(id, publicacao);
     }
-    public int getId_usuario() {
-        return id_usuario;
+
+    @DeleteMapping("/{id}")
+    public void deletarPublicacao(@PathVariable Integer id) {
+        publicacaoService.deletarPublicacao(id);
     }
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
-    }
-    public String getTitulo() {
-        return titulo;
-    }
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-    public String getDescricao() {
-        return descricao;
-    }
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-    public date getData_publicacao() {
-        return data_publicacao;
-    }
-    public void setData_publicacao(date data_publicacao) {
-        this.data_publicacao = data_publicacao;
-    }
-    
 }

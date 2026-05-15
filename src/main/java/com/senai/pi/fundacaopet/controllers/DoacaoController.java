@@ -1,76 +1,43 @@
 package main.java.com.senai.pi.fundacaopet.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import main.java.com.senai.pi.fundacaopet.models.Doacao;
+import main.java.com.senai.pi.fundacaopet.services.DoacaoService;
+
+@RestController
+@RequestMapping("/doacoes")
 public class DoacaoController {
 
-    private int id;
-    public DoacaoController(int id) {
-        this.id = id;
+    @Autowired
+    private DoacaoService doacaoService;
+
+    @GetMapping
+    public List<Doacao> listarDoacoes() {
+        return doacaoService.listarDoacoes();
     }
-    private int id_usuario;
-    private int id_campanha;
-    private Double valor;
-    private string tipo_doacao;
-    private string forma_pagamento;
-    private string status_pagamento;
-    private date data_doacao;
-    public DoacaoController(int id, int id_usuario, int id_campanha, Double valor, string tipo_doacao,
-            string forma_pagamento, string status_pagamento, date data_doacao) {
-        this.id = id;
-        this.id_usuario = id_usuario;
-        this.id_campanha = id_campanha;
-        this.valor = valor;
-        this.tipo_doacao = tipo_doacao;
-        this.forma_pagamento = forma_pagamento;
-        this.status_pagamento = status_pagamento;
-        this.data_doacao = data_doacao;
+
+    @GetMapping("/{id}")
+    public Doacao buscarPorId(@PathVariable Integer id) {
+        return doacaoService.buscarPorId(id);
     }
-    public int getId() {
-        return id;
+
+    @PostMapping
+    public Doacao salvarDoacao(@RequestBody Doacao doacao) {
+        return doacaoService.salvarDoacao(doacao);
     }
-    public void setId(int id) {
-        this.id = id;
+
+    @PutMapping("/{id}")
+    public Doacao atualizarDoacao(@PathVariable Integer id,
+                                  @RequestBody Doacao doacao) {
+        return doacaoService.atualizarDoacao(id, doacao);
     }
-    public int getId_usuario() {
-        return id_usuario;
+
+    @DeleteMapping("/{id}")
+    public void deletarDoacao(@PathVariable Integer id) {
+        doacaoService.deletarDoacao(id);
     }
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
-    }
-    public int getId_campanha() {
-        return id_campanha;
-    }
-    public void setId_campanha(int id_campanha) {
-        this.id_campanha = id_campanha;
-    }
-    public Double getValor() {
-        return valor;
-    }
-    public void setValor(Double valor) {
-        this.valor = valor;
-    }
-    public string getTipo_doacao() {
-        return tipo_doacao;
-    }
-    public void setTipo_doacao(string tipo_doacao) {
-        this.tipo_doacao = tipo_doacao;
-    }
-    public string getForma_pagamento() {
-        return forma_pagamento;
-    }
-    public void setForma_pagamento(string forma_pagamento) {
-        this.forma_pagamento = forma_pagamento;
-    }
-    public string getStatus_pagamento() {
-        return status_pagamento;
-    }
-    public void setStatus_pagamento(string status_pagamento) {
-        this.status_pagamento = status_pagamento;
-    }
-    public date getData_doacao() {
-        return data_doacao;
-    }
-    public void setData_doacao(date data_doacao) {
-        this.data_doacao = data_doacao;
-    }
-    
 }

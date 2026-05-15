@@ -1,75 +1,43 @@
- package main.java.com.senai.pi.fundacaopet.controllers;
- 
+package main.java.com.senai.pi.fundacaopet.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import main.java.com.senai.pi.fundacaopet.models.Campanha;
+import main.java.com.senai.pi.fundacaopet.services.CampanhaService;
+
+@RestController
+@RequestMapping("/campanhas")
 public class CampanhaController {
- 
-    private int id;
-    private String titulo;
-    private String descricao;
-    private Double meta_valor;
-    private Double valor_arrecadado;
-    private date data_inicio;
-    private date data_fim;
-    private String status;
-    public CampanhaController() {
+
+    @Autowired
+    private CampanhaService campanhaService;
+
+    @GetMapping
+    public List<Campanha> listarCampanhas() {
+        return campanhaService.listarCampanhas();
     }
-    public CampanhaController(int id, String titulo, String descricao, Double meta_valor, Double valor_arrecadado,
-            date data_inicio, date data_fim, String status) {
-        this.id = id;
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.meta_valor = meta_valor;
-        this.valor_arrecadado = valor_arrecadado;
-        this.data_inicio = data_inicio;
-        this.data_fim = data_fim;
-        this.status = status;
+
+    @GetMapping("/{id}")
+    public Campanha buscarPorId(@PathVariable Integer id) {
+        return campanhaService.buscarPorId(id);
     }
-    public int getId() {
-        return id;
+
+    @PostMapping
+    public Campanha salvarCampanha(@RequestBody Campanha campanha) {
+        return campanhaService.salvarCampanha(campanha);
     }
-    public void setId(int id) {
-        this.id = id;
+
+    @PutMapping("/{id}")
+    public Campanha atualizarCampanha(@PathVariable Integer id,
+                                      @RequestBody Campanha campanha) {
+        return campanhaService.atualizarCampanha(id, campanha);
     }
-    public String getTitulo() {
-        return titulo;
+
+    @DeleteMapping("/{id}")
+    public void deletarCampanha(@PathVariable Integer id) {
+        campanhaService.deletarCampanha(id);
     }
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-    public String getDescricao() {
-        return descricao;
-    }
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-    public Double getMeta_valor() {
-        return meta_valor;
-    }
-    public void setMeta_valor(Double meta_valor) {
-        this.meta_valor = meta_valor;
-    }
-    public Double getValor_arrecadado() {
-        return valor_arrecadado;
-    }
-    public void setValor_arrecadado(Double valor_arrecadado) {
-        this.valor_arrecadado = valor_arrecadado;
-    }
-    public date getData_inicio() {
-        return data_inicio;
-    }
-    public void setData_inicio(date data_inicio) {
-        this.data_inicio = data_inicio;
-    }
-    public date getData_fim() {
-        return data_fim;
-    }
-    public void setData_fim(date data_fim) {
-        this.data_fim = data_fim;
-    }
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    
- }
+}

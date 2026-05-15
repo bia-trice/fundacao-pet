@@ -1,50 +1,52 @@
- package main.java.com.senai.pi.fundacaopet.services;
+package main.java.com.senai.pi.fundacaopet.services;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import main.java.com.senai.pi.fundacaopet.models.Usuario;
+import main.java.com.senai.pi.fundacaopet.repositories.UsuarioRepository;
+
+@Service
 public class UsuarioService {
 
-    private int id;
-    private String nome;
-    private String email;
-    private String senha;
-    public UsuarioService(int id, String nome, String email, String senha, String cidade) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.cidade = cidade;
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    // Listar todos os usuários
+    public List<Usuario> listarUsuarios() {
+        return usuarioRepository.findAll();
     }
-    private String cidade;
-    public UsuarioService() {
+
+    // Buscar usuário por ID
+    public Usuario buscarPorId(Integer id) {
+        return usuarioRepository.findById(id).orElse(null);
     }
-    public int getId() {
-        return id;
+
+    // Salvar usuário
+    public Usuario salvarUsuario(Usuario usuario) {
+        return usuarioRepository.save(usuario);
     }
-    public void setId(int id) {
-        this.id = id;
+
+    // Atualizar usuário
+    public Usuario atualizarUsuario(Integer id, Usuario usuarioAtualizado) {
+        Usuario usuario = buscarPorId(id);
+
+        if (usuario != null) {
+            usuario.setNome(usuarioAtualizado.getNome());
+            usuario.setEmail(usuarioAtualizado.getEmail());
+            usuario.setSenha(usuarioAtualizado.getSenha());
+            usuario.setCidade(usuarioAtualizado.getCidade());
+
+            return usuarioRepository.save(usuario);
+        }
+
+        return null;
     }
-    public String getNome() {
-        return nome;
+
+    // Deletar usuário
+    public void deletarUsuario(Integer id) {
+        usuarioRepository.deleteById(id);
     }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getSenha() {
-        return senha;
-    }
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-    public String getCidade() {
-        return cidade;
-    }
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-    
 }

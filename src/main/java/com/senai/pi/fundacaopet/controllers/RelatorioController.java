@@ -1,51 +1,43 @@
- package main.java.com.senai.pi.fundacaopet.controllers;
+package main.java.com.senai.pi.fundacaopet.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import main.java.com.senai.pi.fundacaopet.models.Relatorio;
+import main.java.com.senai.pi.fundacaopet.services.RelatorioService;
+
+@RestController
+@RequestMapping("/relatorios")
 public class RelatorioController {
 
-    private int id;
-    private String mes_referencia;
-    private Double total_arrecadado;
-    private String descricao;
-    private date data_publicacao;
-    public int getId() {
-        return id;
+    @Autowired
+    private RelatorioService relatorioService;
+
+    @GetMapping
+    public List<Relatorio> listarRelatorios() {
+        return relatorioService.listarRelatorios();
     }
-    public void setId(int id) {
-        this.id = id;
+
+    @GetMapping("/{id}")
+    public Relatorio buscarPorId(@PathVariable Integer id) {
+        return relatorioService.buscarPorId(id);
     }
-    public String getMes_referencia() {
-        return mes_referencia;
+
+    @PostMapping
+    public Relatorio salvarRelatorio(@RequestBody Relatorio relatorio) {
+        return relatorioService.salvarRelatorio(relatorio);
     }
-    public void setMes_referencia(String mes_referencia) {
-        this.mes_referencia = mes_referencia;
+
+    @PutMapping("/{id}")
+    public Relatorio atualizarRelatorio(@PathVariable Integer id,
+                                        @RequestBody Relatorio relatorio) {
+        return relatorioService.atualizarRelatorio(id, relatorio);
     }
-    public Double getTotal_arrecadado() {
-        return total_arrecadado;
+
+    @DeleteMapping("/{id}")
+    public void deletarRelatorio(@PathVariable Integer id) {
+        relatorioService.deletarRelatorio(id);
     }
-    public void setTotal_arrecadado(Double total_arrecadado) {
-        this.total_arrecadado = total_arrecadado;
-    }
-    public String getDescricao() {
-        return descricao;
-    }
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-    public date getData_publicacao() {
-        return data_publicacao;
-    }
-    public void setData_publicacao(date data_publicacao) {
-        this.data_publicacao = data_publicacao;
-    }
-    public RelatorioController() {
-    }
-    public RelatorioController(int id, String mes_referencia, Double total_arrecadado, String descricao,
-            date data_publicacao) {
-        this.id = id;
-        this.mes_referencia = mes_referencia;
-        this.total_arrecadado = total_arrecadado;
-        this.descricao = descricao;
-        this.data_publicacao = data_publicacao;
-    }
-    
 }

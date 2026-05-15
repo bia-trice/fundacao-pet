@@ -1,50 +1,43 @@
- package main.java.com.senai.pi.fundacaopet.controllers;
+package main.java.com.senai.pi.fundacaopet.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import main.java.com.senai.pi.fundacaopet.models.Usuario;
+import main.java.com.senai.pi.fundacaopet.services.UsuarioService;
+
+@RestController
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
-    private int id;
-    private String nome;
-    private String email;
-    private String senha;
-    private String cidade;
-    public UsuarioController() {
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @GetMapping
+    public List<Usuario> listarUsuarios() {
+        return usuarioService.listarUsuarios();
     }
-    public UsuarioController(int id, String nome, String email, String senha, String cidade) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.cidade = cidade;
+
+    @GetMapping("/{id}")
+    public Usuario buscarPorId(@PathVariable Integer id) {
+        return usuarioService.buscarPorId(id);
     }
-    public int getId() {
-        return id;
+
+    @PostMapping
+    public Usuario salvarUsuario(@RequestBody Usuario usuario) {
+        return usuarioService.salvarUsuario(usuario);
     }
-    public void setId(int id) {
-        this.id = id;
+
+    @PutMapping("/{id}")
+    public Usuario atualizarUsuario(@PathVariable Integer id,
+                                    @RequestBody Usuario usuario) {
+        return usuarioService.atualizarUsuario(id, usuario);
     }
-    public String getNome() {
-        return nome;
+
+    @DeleteMapping("/{id}")
+    public void deletarUsuario(@PathVariable Integer id) {
+        usuarioService.deletarUsuario(id);
     }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getSenha() {
-        return senha;
-    }
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-    public String getCidade() {
-        return cidade;
-    }
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-    
 }
