@@ -1,75 +1,123 @@
 package main.java.com.senai.pi.fundacaopet.models;
 
+import java.time.LocalDate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "campanha")
 public class Campanha {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "titulo")
     private String titulo;
+
+    @Column(name = "descricao")
     private String descricao;
-    private Double meta_valor;
-    private Double valor_arrecadado;
-    private date data_inicio;
-    private date data_fim;
+
+    @Column(name = "meta_valor")
+    private Double metaValor;
+
+    @Column(name = "valor_arrecadado")
+    private Double valorArrecadado;
+
+    @Column(name = "data_inicio")
+    private LocalDate dataInicio;
+
+    @Column(name = "data_fim")
+    private LocalDate dataFim;
+
+    @Column(name = "status")
     private String status;
+
     public Campanha() {
     }
-    public Campanha(int id, String titulo, String descricao, Double meta_valor, Double valor_arrecadado,
-            date data_inicio, date data_fim, String status) {
+
+    public Campanha(Integer id, String titulo, String descricao, Double metaValor, Double valorArrecadado,
+            LocalDate dataInicio, LocalDate dataFim, String status) {
         this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
-        this.meta_valor = meta_valor;
-        this.valor_arrecadado = valor_arrecadado;
-        this.data_inicio = data_inicio;
-        this.data_fim = data_fim;
+        this.metaValor = metaValor;
+        this.valorArrecadado = valorArrecadado;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
         this.status = status;
     }
-    public int getId() {
+
+    public Integer getId() {
         return id;
     }
-    public void setId(int id) {
+
+    public void setId(Integer id) {
         this.id = id;
     }
+
     public String getTitulo() {
         return titulo;
     }
+
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
+
     public String getDescricao() {
         return descricao;
     }
+
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public Double getMeta_valor() {
-        return meta_valor;
+
+    public Double getMetaValor() {
+        return metaValor;
     }
-    public void setMeta_valor(Double meta_valor) {
-        this.meta_valor = meta_valor;
+
+    public void setMetaValor(Double metaValor) {
+        this.metaValor = metaValor;
     }
-    public Double getValor_arrecadado() {
-        return valor_arrecadado;
+
+    public Double getValorArrecadado() {
+        return valorArrecadado;
     }
-    public void setValor_arrecadado(Double valor_arrecadado) {
-        this.valor_arrecadado = valor_arrecadado;
+
+    public void setValorArrecadado(Double valorArrecadado) {
+        this.valorArrecadado = valorArrecadado;
     }
-    public date getData_inicio() {
-        return data_inicio;
+
+    public LocalDate getDataInicio() {
+        return dataInicio;
     }
-    public void setData_inicio(date data_inicio) {
-        this.data_inicio = data_inicio;
+
+    public void setDataInicio(LocalDate dataInicio) {
+        this.dataInicio = dataInicio;
     }
-    public date getData_fim() {
-        return data_fim;
+
+    public LocalDate getDataFim() {
+        return dataFim;
     }
-    public void setData_fim(date data_fim) {
-        this.data_fim = data_fim;
+
+    public void setDataFim(LocalDate dataFim) {
+        this.dataFim = dataFim;
     }
+
     public String getStatus() {
         return status;
     }
+
     public void setStatus(String status) {
         this.status = status;
     }
-}
 
+    
+}
 

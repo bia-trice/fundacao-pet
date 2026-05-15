@@ -1,49 +1,85 @@
 package main.java.com.senai.pi.fundacaopet.models;
 
-public class Comentario{
-    private int id;
-    private int id_publicacao;
-    private int id_usuario;
+import java.time.LocalDate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "comentario")
+public class Comentario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "id_publicacao")
+    private Integer idPublicacao;
+
+    @Column(name = "id_usuario")
+    private Integer idUsuario;
+
+    @Column(name = "texto")
     private String texto;
-    private date data_publicacao;
+
+    @Column(name = "data_publicacao")
+    private LocalDate dataPublicacao;
+
     public Comentario() {
     }
-    public Comentario(int id, int id_publicacao, int id_usuario, String texto, date data_publicacao) {
+
+    public Comentario(Integer id, Integer idPublicacao, Integer idUsuario, String texto, LocalDate dataPublicacao) {
         this.id = id;
-        this.id_publicacao = id_publicacao;
-        this.id_usuario = id_usuario;
+        this.idPublicacao = idPublicacao;
+        this.idUsuario = idUsuario;
         this.texto = texto;
-        this.data_publicacao = data_publicacao;
+        this.dataPublicacao = dataPublicacao;
     }
-    public int getId() {
+
+    public Integer getId() {
         return id;
     }
-    public void setId(int id) {
+
+    public void setId(Integer id) {
         this.id = id;
     }
-    public int getId_publicacao() {
-        return id_publicacao;
+
+    public Integer getIdPublicacao() {
+        return idPublicacao;
     }
-    public void setId_publicacao(int id_publicacao) {
-        this.id_publicacao = id_publicacao;
+
+    public void setIdPublicacao(Integer idPublicacao) {
+        this.idPublicacao = idPublicacao;
     }
-    public int getId_usuario() {
-        return id_usuario;
+
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
+
     public String getTexto() {
         return texto;
     }
+
     public void setTexto(String texto) {
         this.texto = texto;
     }
-    public date getData_publicacao() {
-        return data_publicacao;
-    }
-    public void setData_publicacao(date data_publicacao) {
-        this.data_publicacao = data_publicacao;
-    }
-}
 
+    public LocalDate getDataPublicacao() {
+        return dataPublicacao;
+    }
+
+    public void setDataPublicacao(LocalDate dataPublicacao) {
+        this.dataPublicacao = dataPublicacao;
+    }
+
+    
+}

@@ -1,74 +1,121 @@
 package main.java.com.senai.pi.fundacaopet.models;
 
-public class Doacao{
-    private int id;
-    private int id_usuario;
-    private int id_campanha;
+import java.time.LocalDate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "doacao")
+public class Doacao {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "id_usuario")
+    private Integer idUsuario;
+
+    @Column(name = "id_campanha")
+    private Integer idCampanha;
+
+    @Column(name = "valor")
     private Double valor;
-    private string tipo_doacao;
-    private string forma_pagamento;
-    private string status_pagamento;
-    private date data_doacao;
+
+    @Column(name = "tipo_doacao")
+    private String tipoDoacao;
+
+    @Column(name = "forma_pagamento")
+    private String formaPagamento;
+
+    @Column(name = "status_pagamento")
+    private String statusPagamento;
+
+    @Column(name = "data_doacao")
+    private LocalDate dataDoacao;
+
     public Doacao() {
     }
-    public Doacao(int id, int id_usuario, int id_campanha, Double valor, string tipo_doacao, string forma_pagamento,
-            string status_pagamento, date data_doacao) {
+
+    public Doacao(Integer id, Integer idUsuario, Integer idCampanha, Double valor, String tipoDoacao,
+            String formaPagamento, String statusPagamento, LocalDate dataDoacao) {
         this.id = id;
-        this.id_usuario = id_usuario;
-        this.id_campanha = id_campanha;
+        this.idUsuario = idUsuario;
+        this.idCampanha = idCampanha;
         this.valor = valor;
-        this.tipo_doacao = tipo_doacao;
-        this.forma_pagamento = forma_pagamento;
-        this.status_pagamento = status_pagamento;
-        this.data_doacao = data_doacao;
+        this.tipoDoacao = tipoDoacao;
+        this.formaPagamento = formaPagamento;
+        this.statusPagamento = statusPagamento;
+        this.dataDoacao = dataDoacao;
     }
-    public int getId() {
+
+    public Integer getId() {
         return id;
     }
-    public void setId(int id) {
+
+    public void setId(Integer id) {
         this.id = id;
     }
-    public int getId_usuario() {
-        return id_usuario;
+
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
-    public int getId_campanha() {
-        return id_campanha;
+
+    public Integer getIdCampanha() {
+        return idCampanha;
     }
-    public void setId_campanha(int id_campanha) {
-        this.id_campanha = id_campanha;
+
+    public void setIdCampanha(Integer idCampanha) {
+        this.idCampanha = idCampanha;
     }
+
     public Double getValor() {
         return valor;
     }
+
     public void setValor(Double valor) {
         this.valor = valor;
     }
-    public string getTipo_doacao() {
-        return tipo_doacao;
-    }
-    public void setTipo_doacao(string tipo_doacao) {
-        this.tipo_doacao = tipo_doacao;
-    }
-    public string getForma_pagamento() {
-        return forma_pagamento;
-    }
-    public void setForma_pagamento(string forma_pagamento) {
-        this.forma_pagamento = forma_pagamento;
-    }
-    public string getStatus_pagamento() {
-        return status_pagamento;
-    }
-    public void setStatus_pagamento(string status_pagamento) {
-        this.status_pagamento = status_pagamento;
-    }
-    public date getData_doacao() {
-        return data_doacao;
-    }
-    public void setData_doacao(date data_doacao) {
-        this.data_doacao = data_doacao;
-    }
-}
 
+    public String getTipoDoacao() {
+        return tipoDoacao;
+    }
+
+    public void setTipoDoacao(String tipoDoacao) {
+        this.tipoDoacao = tipoDoacao;
+    }
+
+    public String getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(String formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+
+    public String getStatusPagamento() {
+        return statusPagamento;
+    }
+
+    public void setStatusPagamento(String statusPagamento) {
+        this.statusPagamento = statusPagamento;
+    }
+
+    public LocalDate getDataDoacao() {
+        return dataDoacao;
+    }
+
+    public void setDataDoacao(LocalDate dataDoacao) {
+        this.dataDoacao = dataDoacao;
+    }
+    
+}

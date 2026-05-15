@@ -10,19 +10,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "publicacao")
-public class Publicacao {
+@Table(name = "relatorio")
+public class Relatorio {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "id_usuario")
-    private Integer idUsuario;
+    @Column(name = "mes_referencia")
+    private String mesReferencia;
 
-    @Column(name = "titulo")
-    private String titulo;
+    @Column(name = "total_arrecadado")
+    private Double totalArrecadado;
 
     @Column(name = "descricao")
     private String descricao;
@@ -30,13 +30,14 @@ public class Publicacao {
     @Column(name = "data_publicacao")
     private LocalDate dataPublicacao;
 
-    public Publicacao() {
+    public Relatorio() {
     }
 
-    public Publicacao(Integer id, Integer idUsuario, String titulo, String descricao, LocalDate dataPublicacao) {
+    public Relatorio(Integer id, String mesReferencia, Double totalArrecadado, String descricao,
+            LocalDate dataPublicacao) {
         this.id = id;
-        this.idUsuario = idUsuario;
-        this.titulo = titulo;
+        this.mesReferencia = mesReferencia;
+        this.totalArrecadado = totalArrecadado;
         this.descricao = descricao;
         this.dataPublicacao = dataPublicacao;
     }
@@ -49,20 +50,20 @@ public class Publicacao {
         this.id = id;
     }
 
-    public Integer getIdUsuario() {
-        return idUsuario;
+    public String getMesReferencia() {
+        return mesReferencia;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setMesReferencia(String mesReferencia) {
+        this.mesReferencia = mesReferencia;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public Double getTotalArrecadado() {
+        return totalArrecadado;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setTotalArrecadado(Double totalArrecadado) {
+        this.totalArrecadado = totalArrecadado;
     }
 
     public String getDescricao() {
