@@ -178,6 +178,5 @@ alimentacao_atual TEXT,
 resposta_ia TEXT,
 grau_risco VARCHAR(20),
 data_analise TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-[https://prod.liveshare.vsengsaas.visualstudio.com/join?D57A4BAB8FD536EDDD3DF9E7F2089353A599]
+);(https://prod.liveshare.vsengsaas.visualstudio.com/join?2B4412D1A78DE0C673F629F25C1501960D21)
 
