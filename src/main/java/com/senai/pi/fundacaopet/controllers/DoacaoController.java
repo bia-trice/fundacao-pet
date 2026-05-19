@@ -1,12 +1,12 @@
-package main.java.com.senai.pi.fundacaopet.controllers;
+package com.senai.pi.fundacaopet.controllers;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import main.java.com.senai.pi.fundacaopet.models.Doacao;
-import main.java.com.senai.pi.fundacaopet.services.DoacaoService;
+import com.senai.pi.fundacaopet.models.Doacao;
+import com.senai.pi.fundacaopet.services.DoacaoService;
 
 @RestController
 @RequestMapping("/doacoes")

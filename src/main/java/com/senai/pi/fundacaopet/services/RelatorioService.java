@@ -1,4 +1,6 @@
- package main.java.com.senai.pi.fundacaopet.services;
+ package com.senai.pi.fundacaopet.services;
+
+import java.util.Date;
 
 public class RelatorioService {
 
@@ -6,11 +8,11 @@ public class RelatorioService {
     private String mes_referencia;
     private Double total_arrecadado;
     private String descricao;
-    private date data_publicacao;
+    private Date data_publicacao;
     public RelatorioService() {
     }
     public RelatorioService(int id, String mes_referencia, Double total_arrecadado, String descricao,
-            date data_publicacao) {
+            Date data_publicacao) {
         this.id = id;
         this.mes_referencia = mes_referencia;
         this.total_arrecadado = total_arrecadado;
@@ -41,10 +43,10 @@ public class RelatorioService {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    public date getData_publicacao() {
+    public Date getData_publicacao() {
         return data_publicacao;
     }
-    public void setData_publicacao(date data_publicacao) {
+    public void setData_publicacao(Date data_publicacao) {
         this.data_publicacao = data_publicacao;
     }
     

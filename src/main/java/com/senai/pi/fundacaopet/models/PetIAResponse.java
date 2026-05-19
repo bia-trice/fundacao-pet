@@ -1,4 +1,4 @@
-package main.java.com.senai.pi.fundacaopet.models;
+package com.senai.pi.fundacaopet.models;
 
 public class PetIAResponse {
 

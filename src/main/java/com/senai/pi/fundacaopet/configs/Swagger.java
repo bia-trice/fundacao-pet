@@ -1,3 +1,5 @@
+package com.senai.pi.fundacaopet.configs;
+
 import org.springframework.context.annotation.Configuration;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -6,7 +8,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 info = @Info(
 title = "Fundação Pet",
 version = "1.0",
-description = "Insira a descrição da sua API"
+description = "API para sistema fundação"
 )
 )
 public class Swagger {

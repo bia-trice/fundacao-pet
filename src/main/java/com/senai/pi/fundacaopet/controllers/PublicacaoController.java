@@ -1,12 +1,12 @@
-package main.java.com.senai.pi.fundacaopet.controllers;
+package com.senai.pi.fundacaopet.controllers;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import main.java.com.senai.pi.fundacaopet.models.Publicacao;
-import main.java.com.senai.pi.fundacaopet.services.PublicacaoService;
+import com.senai.pi.fundacaopet.models.Publicacao;
+import com.senai.pi.fundacaopet.services.PublicacaoService;
 
 @RestController
 @RequestMapping("/publicacoes")

@@ -1,8 +1,8 @@
-package main.java.com.senai.pi.fundacaopet.controllers;
+package com.senai.pi.fundacaopet.controllers;
 
-import main.java.com.senai.pi.fundacaopet.models.PetIARequest;
-import main.java.com.senai.pi.fundacaopet.models.PetIAResponse;
-import main.java.com.senai.pi.fundacaopet.services.OpenAIService;
+import com.senai.pi.fundacaopet.models.PetIARequest;
+import com.senai.pi.fundacaopet.models.PetIAResponse;
+import com.senai.pi.fundacaopet.services.OpenAIService;
 
 import org.springframework.web.bind.annotation.*;
 

@@ -1,12 +1,12 @@
-package main.java.com.senai.pi.fundacaopet.services;
+package com.senai.pi.fundacaopet.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import main.java.com.senai.pi.fundacaopet.models.Campanha;
-import main.java.com.senai.pi.fundacaopet.repositories.CampanhaRepository;
+import com.senai.pi.fundacaopet.models.Campanha;
+import com.senai.pi.fundacaopet.repositories.CampanhaRepository;
 
 @Service
 public class CampanhaService {

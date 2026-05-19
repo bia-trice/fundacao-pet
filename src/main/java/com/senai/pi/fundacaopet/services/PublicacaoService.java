@@ -1,12 +1,12 @@
-package main.java.com.senai.pi.fundacaopet.services;
+package com.senai.pi.fundacaopet.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import main.java.com.senai.pi.fundacaopet.models.Publicacao;
-import main.java.com.senai.pi.fundacaopet.repositories.PublicacaoRepository;
+import com.senai.pi.fundacaopet.models.Publicacao;
+import com.senai.pi.fundacaopet.repositories.PublicacaoRepository;
 
 @Service
 public class PublicacaoService {

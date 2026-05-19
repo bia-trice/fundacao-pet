@@ -1,6 +1,6 @@
-package main.java.com.senai.pi.fundacaopet.services;
+package com.senai.pi.fundacaopet.services;
 
-import main.java.com.senai.pi.fundacaopet.models.PetIARequest;
+import com.senai.pi.fundacaopet.models.PetIARequest;
 
 import okhttp3.*;
 import org.json.JSONArray;
