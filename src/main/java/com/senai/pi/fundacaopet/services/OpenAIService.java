@@ -1,95 +1,96 @@
 package com.senai.pi.fundacaopet.services;
 
 import com.senai.pi.fundacaopet.models.PetIARequest;
-
 import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class OpenAIService {
 
-private static final String API_KEY = "SUA_CHAVE_OPENAI";
+    private static final String API_KEY = "AQ.Ab8RN6IkUdM-BwsMA_3T5K7P0_cJfDC2ZQodavUvMmqZFoCJ2g";
+    private static final String URL_API = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key="
+            + API_KEY;
 
-public String gerarAnalise(PetIARequest pet) {
+    public String gerarAnalise(PetIARequest pet) {
+        try {
+            OkHttpClient client = new OkHttpClient();
 
-try {
+            String prompt = """
+                    Você é uma IA Pet educativa.
 
-OkHttpClient client = new OkHttpClient();
+                    Analise os dados abaixo:
 
-String prompt = """
-            Você é uma IA Pet educativa.
+                    Tipo do animal: %s
+                    Idade: %s
+                    Porte: %s
+                    Peso: %s
+                    Sintomas: %s
+                    Alimentação atual: %s
 
-Analise os dados abaixo:
+                    Gere:
+                    - sugestão alimentar
+                    - quantidade diária estimada
+                    - alertas possíveis
+                    - grau de risco
+                    - aviso:
+                    "Essa ferramenta não substitui consulta veterinária"
 
-Tipo do animal: %s
-            Idade: %s
-            Porte: %s
-            Peso: %s
-            Sintomas: %s
-            Alimentação atual: %s
+                    Não faça diagnóstico veterinário.
+                    """
+                    .formatted(
+                            pet.getTipoAnimal(),
+                            pet.getIdade(),
+                            pet.getPorte(),
+                            pet.getPeso(),
+                            pet.getSintomas(),
+                            pet.getAlimentacaoAtual());
 
-Gere:
-            - sugestão alimentar
-            - quantidade diária estimada
-            - alertas possíveis
-            - grau de risco
-            - aviso:
-            "Essa ferramenta não substitui consulta veterinária"
+            JSONObject textObject = new JSONObject();
+            textObject.put("text", prompt);
 
-Não faça diagnóstico veterinário.
-            """
-            .formatted(
-                    pet.getTipoAnimal(),
-                    pet.getIdade(),
-                    pet.getPorte(),
-                    pet.getPeso(),
-                    pet.getSintomas(),
-                    pet.getAlimentacaoAtual()
-            );
+            JSONArray partsArray = new JSONArray();
+            partsArray.put(textObject);
 
-JSONObject bodyJson = new JSONObject();
+            JSONObject partsObject = new JSONObject();
+            partsObject.put("parts", partsArray);
 
-bodyJson.put("model", "gpt-4.1-mini");
+            JSONArray contentsArray = new JSONArray();
+            contentsArray.put(partsObject);
 
-JSONArray messages = new JSONArray();
+            JSONObject bodyJson = new JSONObject();
+            bodyJson.put("contents", contentsArray);
 
-JSONObject message = new JSONObject();
-
-message.put("role", "user");
-            message.put("content", prompt);
-
-messages.put(message);
-
-bodyJson.put("messages", messages);
-
-RequestBody body = RequestBody.create(
+            RequestBody body = RequestBody.create(
                     bodyJson.toString(),
-                    MediaType.parse("application/json")
-            );
+                    MediaType.get("application/json; charset=utf-8"));
 
-Request request = new Request.Builder()
-                    .url("https://api.openai.com/v1/chat/completions")
+            Request request = new Request.Builder()
+                    .url(URL_API)
                     .post(body)
-                    .addHeader("Authorization", "Bearer " + API_KEY)
                     .addHeader("Content-Type", "application/json")
                     .build();
 
-Response response = client.newCall(request).execute();
+            Response response = client.newCall(request).execute();
 
-String responseBody = response.body().string();
+            if (!response.isSuccessful()) {
+                System.out.println("Erro do Gemini: " + response.code());
+                return "Erro na resposta da IA: " + response.code();
+            }
 
-JSONObject responseJson = new JSONObject(responseBody);
+            String responseBody = response.body().string();
+            JSONObject responseJson = new JSONObject(responseBody);
 
-return responseJson
-                    .getJSONArray("choices")
+            return responseJson
+                    .getJSONArray("candidates")
                     .getJSONObject(0)
-                    .getJSONObject("message")
-                    .getString("content");
+                    .getJSONObject("content")
+                    .getJSONArray("parts")
+                    .getJSONObject(0)
+                    .getString("text");
 
-} catch (Exception e) {
-
-return "Erro ao gerar análise.";
-
-}
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Erro ao gerar análise.";
+        }
     }
 }
